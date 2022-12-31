@@ -29,11 +29,13 @@ const addBookHandler = (request, h) => {
     response.code(400);
     return response;
   }
-  //  Mengecek apakah jumlah halaman yang dibaca apakah lebih kecil atau kurang dari jumlah halaman
+  // Mengecek apakah jumlah halaman yang dibaca
+  // apakah lebih kecil atau kurang dari jumlah halaman
   if (readPage > pageCount) {
     const response = h.response({
       status: 'fail',
-      message: 'Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount',
+      message: `Gagal menambahkan buku. 
+      readPage tidak boleh lebih besar dari pageCount`,
     });
     response.code(400);
     return response;
@@ -61,7 +63,8 @@ const addBookHandler = (request, h) => {
     updatedAt,
   });
   // Mengecek apakah data buku tersimpan di collection books
-  const isSuccess = books.filter((book) => book.id === id).length > 0;
+  const isSuccess = books.filter(
+      (book) => book.id === id).length > 0;
   if (isSuccess) {
     const response = h.response({
       status: 'success',
@@ -92,8 +95,11 @@ const getAllBooksHandler = (request, h) => {
   } = request.query;
   // Mengecek apakah parameter request name ada nilainya
   if (name) {
-    // mengfilter buku berdasarkan nama buku yang dihuruf kecilkan dengan parameter nama yang dihuruf kecilkan
-    const filteredBooks = books.filter((book) => book.name.toLowerCase().includes(name.toLowerCase()));
+    // mengfilter buku berdasarkan nama buku yang dihuruf kecilkan
+    // dengan parameter nama yang dihuruf kecilkan
+    const filteredBooks = books.filter(
+        (book) => book.name.toLowerCase().includes(name.toLowerCase()),
+    );
     const response = h.response({
       status: 'success',
       data: {
@@ -106,11 +112,13 @@ const getAllBooksHandler = (request, h) => {
     });
     response.code(200);
     return response;
-  }
-  // Mengecek apakah parameter request reading ada nilainya
-  else if (reading) {
-    //  mengfilter buku berdasarkan property reading buku yang di typecasting ke int dengan parameter reading
-    const filteredBooks = books.filter((book) => Number(book.reading) === Number(reading));
+    // Mengecek apakah parameter request reading ada nilainya
+  } else if (reading) {
+    // mengfilter buku berdasarkan property reading buku
+    // yang ditypecasting ke int dengan parameter reading
+    const filteredBooks = books.filter(
+        (book) => Number(book.reading) === Number(reading),
+    );
     const response = h.response({
       status: 'success',
       data: {
@@ -123,11 +131,13 @@ const getAllBooksHandler = (request, h) => {
     });
     response.code(200);
     return response;
-  }
-  // Mengecek apakah parameter request finished ada nilainya
-  else if (finished) {
-    //  mengfilter buku berdasarkan property finished buku yang di typecasting ke int dengan parameter finished
-    const filteredBooks = books.filter((book) => Number(book.finished) === Number(finished));
+    // Mengecek apakah parameter request finished ada nilainya
+  } else if (finished) {
+    // mengfilter buku berdasarkan property finished buku
+    // yang ditypecasting ke int dengan parameter finished
+    const filteredBooks = books.filter(
+        (book) => Number(book.finished) === Number(finished),
+    );
     const response = h.response({
       status: 'success',
       data: {
@@ -140,9 +150,9 @@ const getAllBooksHandler = (request, h) => {
     });
     response.code(200);
     return response;
-  }
-  //  Jika tidak ada parameter request yang diberikan maka akan mengembalikan semua data buku
-  else {
+    //  Jika tidak ada parameter request yang diberikan
+    // maka akan mengembalikan semua data buku
+  } else {
     const response = h.response({
       status: 'success',
       data: {
@@ -205,11 +215,13 @@ const editBookByIdHandler = (request, h) => {
     response.code(400);
     return response;
   }
-  //  Mengecek apakah jumlah halaman yang dibaca apakah lebih kecil atau kurang dari jumlah halaman
+  //  Mengecek apakah jumlah halaman yang dibaca
+  // apakah lebih kecil atau kurang dari jumlah halaman
   if (readPage > pageCount) {
     const response = h.response({
       status: 'fail',
-      message: 'Gagal memperbarui buku. readPage tidak boleh lebih besar dari pageCount',
+      message: `Gagal memperbarui buku. 
+      readPage tidak boleh lebih besar dari pageCount`,
     });
     response.code(400);
     return response;
